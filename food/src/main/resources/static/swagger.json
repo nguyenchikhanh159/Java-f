@@ -1,0 +1,445 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Authentication",
+    "contact": {
+      "email": "jara@jara-company.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:8089",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "login",
+      "description": "login in system"
+    },
+    {
+      "name": "admin",
+      "description": "admin manager system"
+    },
+    {
+      "name": "user",
+      "description": "user in system"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Login syestem",
+        "description": "check account when login in system\n",
+        "operationId": "loginSystem",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response from backend when login success",
+            "schema": {
+              "$ref": "#/definitions/ResponseLogin"
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/change-password-user": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Change password in system",
+        "description": "Change password in system\n",
+        "operationId": "changePassword",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "confirmPassword",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response from backend when login success",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "resultCode": {
+                  "type": "integer",
+                  "format": "int64"
+                },
+                "msg": {
+                  "type": "string",
+                  "example": "Change password success"
+                },
+                "body": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/admin/get-user": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "get user in system",
+        "description": "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "operationId": "getUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response from backend when get user success",
+            "schema": {
+              "$ref": "#/definitions/ResponseUser"
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/admin/get-all-user": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "get all user in system",
+        "description": "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+        "operationId": "getAllUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results matching criteria",
+            "schema": {
+              "$ref": "#/definitions/ResponseAllUser"
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/user/create": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "create user",
+        "description": "create user info\n",
+        "operationId": "creatUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fullName",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "gender",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "phone",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response info user",
+            "schema": {
+              "$ref": "#/definitions/ResponseUser"
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    },
+    "/user/get-user": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "get info user in system",
+        "description": "get user info\n",
+        "operationId": "get user info",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "response info user",
+            "schema": {
+              "$ref": "#/definitions/ResponseUser"
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "example": "phongchodien"
+        },
+        "email": {
+          "type": "string",
+          "example": "phongchodien@gmail.com"
+        },
+        "fullName": {
+          "type": "string",
+          "example": "Phong Chó Điên"
+        },
+        "numberPhone": {
+          "type": "string",
+          "example": "0777091855"
+        },
+        "gender": {
+          "type": "string",
+          "example": "male"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "example": "06/12/1997"
+        }
+      }
+    },
+    "ResponseLogin": {
+      "type": "object",
+      "properties": {
+        "resultCode": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string",
+          "example": "Login Success"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "example": "phongchodien"
+            },
+            "email": {
+              "type": "string",
+              "example": "phongchodien@gmail.com"
+            },
+            "token": {
+              "type": "string",
+              "example": "JL4fHYWjxQ49HQzk8V6mSV2XrMb9RmGGkf6qAbr7A3pdQL8jdyagXT7sfqEYn7eeEBMajGh9Wsa8LmCuFtckGk4xyLE4NFMpt5wA"
+            },
+            "fullName": {
+              "type": "string",
+              "example": "Lươn Như Phong"
+            }
+          }
+        }
+      }
+    },
+    "ResponseUser": {
+      "type": "object",
+      "properties": {
+        "resultCode": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string",
+          "example": "Login Success"
+        },
+        "body": {
+          "type": "object",
+          "properties": {
+            "username": {
+              "type": "string",
+              "example": "phongchodien"
+            },
+            "email": {
+              "type": "string",
+              "example": "phongchodien@gmail.com"
+            },
+            "fullName": {
+              "type": "string",
+              "example": "Lươn Như Phong"
+            },
+            "numberPhone": {
+              "type": "string",
+              "example": "+84964129341"
+            },
+            "gender": {
+              "type": "string",
+              "example": "male"
+            },
+            "dateOfBirth": {
+              "type": "string",
+              "example": "06/12/1997"
+            }
+          }
+        }
+      }
+    },
+    "ResponseAllUser": {
+      "type": "object",
+      "properties": {
+        "resultCode": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string",
+          "example": "Login Success"
+        },
+        "body": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      }
+    }
+  }
+}
